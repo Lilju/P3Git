@@ -27,3 +27,51 @@ function generateWorks(works) {
         gallery.appendChild(workElement);
   }
 }
+
+//Bouton Tous
+const allButton = document.getElementById("all");
+allButton.addEventListener("click", function () {  
+  clearWorks();    
+  fetchWorks().then((works) => generateWorks(works))
+});
+
+//Bouton objet
+const objectButton = document.getElementById("objects");
+objectButton.addEventListener("click", function () {  
+  clearWorks();
+  fetchWorks().then((works) => {
+    let objet = works.filter(function(work) {
+      return work.categoryId === 1;
+    })
+    generateWorks(objet);
+  })
+});
+
+//Bouton appartement
+const appartmentButton = document.getElementById("appartments");
+appartmentButton.addEventListener("click", function () {
+  clearWorks();
+  fetchWorks().then((works) => {
+    let appartment = works.filter(function(work) {
+        return work.categoryId === 2;
+    });
+    generateWorks(appartment);
+  })
+});
+
+//Bouton hotels
+const hotelButton = document.querySelector("#hotels");
+hotelButton.addEventListener("click", function () {
+  const hotelResponse = fetch("http://localhost:5678/api/works")
+   .then((hotelResponse) => { 
+    return hotelResponse.json()
+  })
+   .then((hotelResponse) => {
+    let hotelWorks = hotelResponse;
+    let hotelFilter = hotelWorks.filter(function(work) {
+      return work.categoryId === 3;
+   })
+    clearWorks();
+    generateWorks(hotelFilter);
+    });    
+});

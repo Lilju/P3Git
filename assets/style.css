@@ -56,6 +56,25 @@ body {
 	background-color: #fffef8;
 }
 
+.edition-mode {
+	background-color: black;
+	color: white;
+	font-size: 19px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	height: 60px;
+}
+
+.changes-publish {
+	border-radius: 50px;
+	font-weight: 500;
+	padding: 11px 23px;
+	cursor: pointer;
+	border: none;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -140,12 +159,59 @@ a {
 	margin-bottom: 0.5em;
 }
 
+.edit {
+	display: flex;
+	gap: 8px;
+}
+
 .project-header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	gap: 10px;
+}
+
+#btn2 {
+	position: relative;
+	top: -12px;
+}
+
+.filter-buttons {
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+	margin : 3em auto ;
+}
+
+.filter, #addpicture {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: #1D6154;
+	background-color: #fffef8;
+	border: 1px solid #1D6154;
+	font-size: 1.2em;
+	text-align: center;
+	line-height: 19px;
+	border-radius: 60px;
+	padding: 10px 15px;
+	cursor: pointer;
+	transition: 0.2s ease-in-out;
+}
+
+#addpicture {
+	font-size: 14px;
+	min-width: 237px;
+}
+
+.filter:hover, .selected-filter {
+	color: #fffef8;
+	background-color: #1D6154;
+}
+
+.filter:focus {
+	color: #fffef8;
+	background-color: #1D6154;
 }
 
 #portfolio h2 {
@@ -192,14 +258,14 @@ a {
 	margin-bottom: 20px;
 }
 
-#contact form {
+#contact form, #login form, #add form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #login input, #add-form input, select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -207,12 +273,12 @@ a {
 	font-family: 'Work Sans', sans-serif;
 }
 
-#add-form input {
+#add-form input, #add-form select {
 	width: 420px;
 	font-size: 14px;
 }
 
-#contact label {
+#contact label, #login label, #add-form label {
 	margin: 2em 0 1em 0;
 }
 
@@ -249,4 +315,8 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em;
+}
+
+.hidden {
+	display: none;
 }
