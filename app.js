@@ -75,3 +75,15 @@ hotelButton.addEventListener("click", function () {
     generateWorks(hotelFilter);
     });    
 });
+//Si le token est stocké dans le localstorage, modifier la page d'accueil
+let token = window.localStorage.getItem("token");
+if ( token !== null) {
+  logoutlink.innerText = "logout";
+  //document.querySelector("edit");
+  //document.getElementsByClassName("edit")[1].classList.remove("hidden");
+  document.getElementById("btn1").classList.remove("hidden");
+  document.getElementById("btn2").classList.remove("hidden");
+  document.getElementById("btn3").classList.remove("hidden");
+  filters.classList.add("hidden");
+  document.querySelector('.edition-mode').classList.remove("hidden");  
+}
