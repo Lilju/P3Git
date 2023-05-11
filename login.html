@@ -9,6 +9,8 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<script src="login.js" defer></script>
+	
 </head>
 <body>
 <header>
@@ -17,7 +19,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li id="login-link">login</li>
+			<li id="loginlink">login</li>
 			<li><img id="insta" src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -28,10 +30,9 @@
 		<form id="loginform">
 			<label for="email">Email</label>
 			<input type="email" name="email" id="email" required>
-			<p class="login-error"></p>
             <label for="password">Mot de passe</label>
 			<input type="password" name="password" id="password" required>
-			<p class="password-error"></p>
+			<p id="password-error"></p>
 			<input type="submit" value="Se connecter" id="submit">
 			<a href="#" id="forgot-password">Mot de passe oublié</a>
 		</form>

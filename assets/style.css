@@ -305,6 +305,12 @@ input[type="submit"], #addpicture, #validate {
 	color: black;
 }
 
+#password-error {
+	color: red;
+	margin-top: 20px;
+	font-size: 1.1em;
+}
+
 .login-footer {
 	position: absolute;
 	bottom: 0px;
