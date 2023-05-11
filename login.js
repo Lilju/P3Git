@@ -1,5 +1,3 @@
-
-
 function login() {
   const loginInfo = {
     email: email.value,

@@ -11,7 +11,8 @@
 	<script src="https://kit.fontawesome.com/134cd33a2f.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 	<script src="app.js" defer></script>
-	</head>
+	<script src="modale.js" defer></script>
+</head>
 <body>
 <div class="edition-mode hidden">
 	<i class="fa-solid fa-pen-to-square"></i>
@@ -56,6 +57,48 @@
 			<div class="edit hidden" id="btn2">
 				<i class="fa-solid fa-pen-to-square"></i>
 				<p>modifier</p>
+			</div>
+		</div>
+		<div id="modal" class="modal">
+			<div class="modal-wrapper" id="modal1">
+				<div class="close" id="close">&times;</div>				
+            	<h2 class="modal-title">Galerie photo</h2>
+            	<div class="photos-container"></div>
+            <hr>
+				<div class="modal-buttons">
+					<button id="addpicture">Ajouter une photo</button>
+					<a href="#" class="delete-btn">Supprimer la galerie</a>
+				</div>
+			</div>
+			<div class="modal-wrapper second" id="modal2">
+				<div id="ui-wrapper">
+					<i class="fa-solid fa-arrow-left" id="back-arrow"></i>
+					<div class="close" id="close2">&times;</div>
+				</div>
+				<h2 class="modal-title">Ajout photo</h2>
+				<div class="add-photo-container">
+					<div>
+						<img id="preview">
+					</div>
+					<div id="preview-ui">
+						<i class="fa-sharp fa-regular fa-image" id="landscape-icon"></i>
+						<label for="upload-photo" id="addphoto">+ Ajouter photo<input type="file" id="upload-photo" accept="image/*" onchange="showPreview(event);"></label>
+						<p>jpeg, png: 4mo max</p>
+					</div>
+				</div>
+				<form id="add-form">
+					<label for="title" content="Titre">Titre</label>
+					<input type="text" id="title">
+					<label for="category" content="Catégorie" id="category">Catégorie</label>
+					<select>
+						<option value=""></option>
+						<option value="Objets">Objets</option>
+						<option value="Appartements">Appartements</option>
+						<option value="Hotels & Restaurants">Hotels</option>
+					</select>
+				</form>
+				<hr>
+				<button id="validate">Valider</button>
 			</div>
 		</div>
 		<div class="filter-buttons" id="filters">

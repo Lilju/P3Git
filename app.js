@@ -17,6 +17,7 @@ fetchWorks().then((works) => generateWorks(works))
 function generateWorks(works) {
     for (let i = 0; i < works.length; i++) {
         const workElement = document.createElement("figure");
+        workElement.setAttribute("id", "work" + works[i].id);
         const imageElement = document.createElement("img");
         const fig = document.createElement("figcaption");
         imageElement.src = works[i].imageUrl;
@@ -85,10 +86,3 @@ if ( token !== null) {
   filters.classList.add("hidden");
   document.querySelector('.edition-mode').classList.remove("hidden");  
 }
-
-  //lors du logout je supprime le token
-  // authentication.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   window.sessionStorage.removeItem("token");
-  //   location.reload();
-  // });
