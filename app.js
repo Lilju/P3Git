@@ -1,20 +1,20 @@
 //Effacer les travaux affichés par défaut
-function clearWorks() {
+export function clearWorks() {
   const refresh = document.querySelector('.gallery');
   refresh.innerHTML = "";
 }
 clearWorks();
 
 //Fetch et affichage par défaut des travaux
-async function fetchWorks () {
-  const r = await fetch("http://localhost:5678/api/works")
-  if (r.ok === true) {
-    return r.json();
+export async function fetchWorks () {
+  const response = await fetch("http://localhost:5678/api/works");
+  if (response.ok === true) {
+    return response.json();
   }  
 }
 fetchWorks().then((works) => generateWorks(works))
 //Fonction d'affichage des travaux
-function generateWorks(works) {
+export function generateWorks(works) {
     for (let i = 0; i < works.length; i++) {
         const workElement = document.createElement("figure");
         workElement.setAttribute("id", "work" + works[i].id);

@@ -10,8 +10,8 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/134cd33a2f.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="app.js" defer></script>
-	<script src="modale.js" defer></script>
+	<script type="module" src="app.js" defer></script>
+	<script type="module" src="modale.js" defer></script>
 </head>
 <body>
 <div class="edition-mode hidden">
@@ -82,23 +82,26 @@
 					</div>
 					<div id="preview-ui">
 						<i class="fa-sharp fa-regular fa-image" id="landscape-icon"></i>
-						<label for="upload-photo" id="addphoto">+ Ajouter photo<input type="file" id="upload-photo" accept="image/*" onchange="showPreview(event);"></label>
+							<label for="uploadphoto" id="addphoto">+ Ajouter photo
+								<input type="file" id="uploadphoto" accept="image/*" required>
+							</label>
 						<p>jpeg, png: 4mo max</p>
 					</div>
 				</div>
-				<form id="add-form">
+				<form id="add-form" enctype="multipart/form-data">
 					<label for="title" content="Titre">Titre</label>
-					<input type="text" id="title">
-					<label for="category" content="Catégorie" id="category">Catégorie</label>
-					<select>
-						<option value=""></option>
-						<option value="Objets">Objets</option>
-						<option value="Appartements">Appartements</option>
-						<option value="Hotels & Restaurants">Hotels</option>
+					<input type="text" id="title" required>
+					<label for="category" content="Catégorie">Catégorie</label>
+					<select id="category">
+						<option value="" id="0"></option>
+						<option value="Objets" id="1">Objets</option>
+						<option value="Appartements" id="2">Appartements</option>
+						<option value="Hotels & Restaurants" id="3">Hotels</option>
 					</select>
+					<hr>
+				<input type="submit" id="validate" value="Valider">
 				</form>
-				<hr>
-				<button id="validate">Valider</button>
+				
 			</div>
 		</div>
 		<div class="filter-buttons" id="filters">

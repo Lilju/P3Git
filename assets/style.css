@@ -305,12 +305,6 @@ input[type="submit"], #addpicture, #validate {
 	color: black;
 }
 
-#password-error {
-	color: red;
-	margin-top: 20px;
-	font-size: 1.1em;
-}
-
 .login-footer {
 	position: absolute;
 	bottom: 0px;
@@ -325,6 +319,11 @@ footer nav ul {
 
 .hidden {
 	display: none;
+}
+
+.edition-mode {
+	width: 100vw;
+	margin-left:calc(-1 * ((100vw - 100%) / 2));
 }
 
 .modal {
@@ -409,7 +408,7 @@ footer nav ul {
 	cursor: pointer;
 }
 
-#upload-photo {
+#uploadphoto {
 	display: none;
 }
 

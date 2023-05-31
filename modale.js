@@ -1,3 +1,5 @@
+import { fetchWorks, generateWorks, clearWorks } from "./app.js";
+
 //Ouvrir la fenêtre modale
 const modal = document.querySelector("#modal");
 function openModal() {
@@ -17,15 +19,15 @@ let closeTwo = document.querySelector("#close2");
 close.onclick = closeModal;
 closeTwo.onclick = closeModal;
 function closeModal() {
-modal.style.display = "none";
-document.querySelector(".photos-container").innerHTML = "";
+  document.querySelector(".photos-container").innerHTML = "";
+  modal.style.display = "none";
 }
 
 
 window.onclick = function(event) {
 if (event.target == modal) {
-    modal.style.display = "none";
-    document.querySelector(".photos-container").innerHTML = "";
+  backToFirstModal();
+  closeModal();    
 }
 }
 
@@ -33,11 +35,12 @@ if (event.target == modal) {
 async function showProjectsModal() {
     const response = await fetch("http://localhost:5678/api/works");
     const works = await response.json();
+    console.log(works);
     for (let i = 0; i < works.length; i++) {
         const modalWorks = document.querySelector(".photos-container");
         const figureElement = document.createElement("figure");
         figureElement.classList.add("modal-figure");
-        figureElement.setAttribute("id", works[i].id);
+        figureElement.setAttribute("id", "modal" + works[i].id);
         const imageElement = document.createElement("img");
         imageElement.src = works[i].imageUrl;
         const figcaptionElement = document.createElement("figcaption");
@@ -48,7 +51,7 @@ async function showProjectsModal() {
         deleteButton.innerHTML = "<i class='fa-solid fa-trash-can'></i>";
         moveButton.innerHTML = "<i class='fa-solid fa-arrows-up-down-left-right'></i>";
         deleteButton.classList.add("trash-icon");
-        deleteButton.setAttribute("id", "delete" + works[i].id);
+        deleteButton.setAttribute("id", works[i].id);
         moveButton.classList.add("move-icon");
         modalWorks.appendChild(figureElement);
         figureElement.appendChild(imageElement);
@@ -56,7 +59,8 @@ async function showProjectsModal() {
         figureElement.appendChild(deleteButton);
         figureElement.appendChild(moveButton);
     }
-    testDelete();    
+    deleteWork();
+    modal.style.display = "flex";  
 };
 
 //Faire apparaître la modale2 en cliquant sur le bouton "Ajouter une photo"
@@ -82,6 +86,7 @@ document
   }
 
 //Avant d'uploader un nouveau projet, afficher un preview de l'image
+uploadphoto.addEventListener("change", showPreview);
 function showPreview(event) {
     if(event.target.files.length > 0){
         const src = URL.createObjectURL(event.target.files[0]);
@@ -91,4 +96,79 @@ function showPreview(event) {
         const hideButton = document.getElementById("preview-ui");
         hideButton.style.display = "none";
     }
-}
+};
+
+//Effacer un des projets en cliquant sur l'icône poubelle
+function deleteWork() {
+    let trashes = document.querySelectorAll(".trash-icon");
+    for (let trashIcon of trashes) {
+      trashIcon.addEventListener("click",(e)=> {
+        e.stopPropagation();
+        const id = ((e.target).parentNode.id);
+        const figureToDelete = document.getElementById("work"+id);
+        const figureToDeleteModal = document.getElementById("modal"+id);
+        const token = localStorage.getItem("token"); 
+        fetch(`http://localhost:5678/api/works/${id}`,{
+          method:"DELETE",
+           headers: {
+          'authorization': `Bearer ${token}`,
+          }
+        })
+        .then (response => {
+          if (response.status === 204 ) {
+          figureToDelete.remove();
+          figureToDeleteModal.remove();
+          } 
+        }) 
+      }) 
+    } 
+  }
+
+//En cliquant sur le bouton Valider, envoi du nouveau projet avec un fetch POST
+document.querySelector("#add-form").addEventListener("submit",(e)=> {
+  e.preventDefault();
+  const file = document.querySelector("#uploadphoto");
+  if (file.files[0].size < 4000000) {
+    fetchPostWork();
+  }
+});
+
+async function fetchPostWork() {
+    try {
+      const token = localStorage.getItem("token");
+const file = document.querySelector("#uploadphoto");
+const title = document.querySelector("#title");
+const category = document.querySelector("#category");
+let formData = new FormData();
+formData.append('image', file.files[0]);
+formData.append('title', title.value);
+formData.append('category', category.selectedIndex);
+
+      const response = await fetch("http://localhost:5678/api/works",{
+        method: "POST",
+        headers: {
+          'authorization': `Bearer ${token}`,
+          //'accept':'application/json',
+        },
+        body: formData  
+      });
+      const rep = await response.json();
+      if (response.status === 201) { 
+        //preview.style.display="none";
+        backToFirstModal();
+        closeModal();
+        document.querySelector(".photos-container").innerHTML = "";
+        clearWorks();
+        fetchWorks().then((works) => generateWorks(works));
+        //showProjectsModal();
+        document.querySelector("#add-form").reset();
+      } else {
+        console.log('Une erreur est survenue', rep);
+      }
+    } catch (err) {
+      console.log('Une erreur est survenue', err);
+    }
+  }
+  
+ 
+//Bloquer l'envoi si les champs du formulaire d'ajout ne sont pas remplis
