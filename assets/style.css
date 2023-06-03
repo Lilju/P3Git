@@ -265,7 +265,7 @@ a {
 	flex-direction: column;
 }
 
-#contact input, #login input, #add-form input, select {
+#contact input, #login input, #title, #category, select {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -273,7 +273,7 @@ a {
 	font-family: 'Work Sans', sans-serif;
 }
 
-#add-form input, #add-form select {
+#title, #category, #add-form select {
 	width: 420px;
 	font-size: 14px;
 }
@@ -287,7 +287,7 @@ a {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"], #addpicture, #validate {
+input[type="submit"], #addpicture {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -471,6 +471,7 @@ footer nav ul {
 }
 
 .move-icon {
+	display: none;
 	position: absolute;
 	top: 5px;
 	left: 5px;
@@ -481,7 +482,7 @@ footer nav ul {
 	display: none;
 }
 
-.move-icon:hover i{
+.move-icon:hover { 
 	display: block;
 }
 
@@ -506,4 +507,10 @@ hr {
   height: 0px;
   border: 1px solid #B3B3B3;
   margin-top: 40px;
+}
+
+#size-error {
+	color: red;
+	font-size: 12px;
+	margin-top: 5px;
 }

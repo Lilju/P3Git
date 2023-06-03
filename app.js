@@ -80,9 +80,19 @@ hotelButton.addEventListener("click", function () {
 let token = window.localStorage.getItem("token");
 if ( token !== null) {
   logoutlink.innerText = "logout";
+  logoutlink.addEventListener("click", logOut);
   document.getElementById("btn1").classList.remove("hidden");
   document.getElementById("btn2").classList.remove("hidden");
   document.getElementById("btn3").classList.remove("hidden");
   filters.classList.add("hidden");
   document.querySelector('.edition-mode').classList.remove("hidden");  
+}
+
+//Logout
+function logOut(e) {
+  e.preventDefault();
+  localStorage.removeItem("token");
+  logoutlink.innerText = "login";
+  //logoutlink.setAttribute("href", "index.html");
+  window.location.replace("index.html");
 }
